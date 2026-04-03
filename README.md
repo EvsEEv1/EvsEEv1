@@ -1,16 +1,45 @@
-## Hi there 👋
+# Привет! Я Евсей Евсеев 👋
 
-<!--
-**EvsEEv1/EvsEEv1** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## 🔍 Перехожу в тестирование ПО из промышленного контроля качества
 
-Here are some ideas to get you started:
+3 года работал с дефектами, документацией и контролем качества на производстве.  
+С ноября 2025 года целенаправленно учусь на **QA Engineer**.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+---
+
+## 🛠 Мои навыки
+
+| Категория | Технологии |
+|-----------|------------|
+| Тестирование | Ручное, функциональное, регрессионное, чёрный ящик |
+| Документация | Тест-кейсы, чек-листы, баг-репорты |
+| Инструменты | Jira, Trello, Qase.io, TestIt, Postman, Swagger |
+| Базы данных | SQL (SELECT, JOIN) |
+| API | HTTP, API, DevTools |
+| Системы | Linux, Git, GitHub, Hyper-V |
+| Языки | Python (основы), Bash, Английский B1 |
+
+---
+
+## 📁 Мои пет-проекты
+
+### 1. Тестирование VPN-сервера на Linux VPS
+- Негативные сценарии, логирование, проверка отказоустойчивости
+- Документация процесса тестирования
+
+### 2. Примеры тестовой документации
+- [Тест-кейсы для авторизации](test-cases/authorization-test-cases.md)
+- [Баг-репорты](bug-reports/bug-reports-example.md)
+- [Чек-лист формы логина](checklists/login-form-checklist.md)
+
+---
+
+## 📫 Контакты
+
+- **Telegram:** @Evseev_Evsey
+- **Email:** powerfulpugilist@gmail.com
+- **Резюме на hh.ru:** [ссылка на твоё резюме]
+
+---
+
+*📌 Ищу первую коммерческую работу или стажировку в QA. Готов выполнить тестовое задание.*
