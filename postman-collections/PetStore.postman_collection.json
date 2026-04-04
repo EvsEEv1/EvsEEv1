@@ -1,0 +1,540 @@
+{
+  "info": {
+    "_postman_id": "d7c58e79-f98f-41a1-b077-5d1a44470132",
+    "name": "PetStore",
+    "description": "# Тестирование API Petstore. Коллекция для портфолио QA.\n\nЭта коллекция предназначена для тестирования REST API Petstore и демонстрирует основные HTTP-методы: `GET`, `POST`, `PUT` и `DELETE`.\n\n## Начало работы\n\nПеред отправкой запросов убедитесь, что в активном окружении задана переменная `base_url` (например, `https://petstore.swagger.io/v2`).\n\n## Структура коллекции\n\nКоллекция включает следующие сценарии:\n\n- **Создание питомца** — добавление нового питомца через POST-запрос\n- **Получение питомца по ID** — проверка существующего и несуществующего питомца\n- **Поиск по статусу** — фильтрация питомцев по существующему и несуществующему статусу\n- **Обновление питомца** — изменение данных через PUT-запрос\n- **Удаление питомца** — удаление записи через DELETE-запрос\n\n## Переменные окружения\n\n| Переменная | Описание |\n|---|---|\n| `base_url` | Базовый URL API (например, `https://petstore.swagger.io/v2`) |",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50936962",
+    "_collection_link": "https://go.postman.co/collection/50936962-d7c58e79-f98f-41a1-b077-5d1a44470132?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Создать питомца (POST)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "",
+              "",
+              "pm.test('Status code is 200 or 201', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([",
+              "        200,",
+              "        201",
+              "    ]);",
+              "})",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test('Response has JSON content-type', function () {",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "})",
+              "",
+              "pm.test('Response body contains pet id', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('id', 666);",
+              "})",
+              "",
+              "pm.test('Response body contains pet name', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('name', 'Sobaka');",
+              "})",
+              "",
+              "pm.test('Response body contains pet status', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('status', 'Устала и спит');",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\":666,\n  \"name\": \"Sobaka\",\n  \"status\": \"Устала и спит\"\n}\n\n  ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/pet",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet"
+          ]
+        },
+        "description": "Это POST-запрос, который используется для создания нового питомца в системе. Данные передаются в теле запроса в формате JSON и отражаются в ответе.\n\nУспешный POST-запрос, как правило, возвращает код ответа `200 OK` или `201 Created`."
+      },
+      "response": []
+    },
+    {
+      "name": "Получить существующего питомца по ID (GET)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test('Response has JSON content-type', function () {",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "})",
+              "",
+              "pm.test('Response body contains correct pet id', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('id', 666);",
+              "})",
+              "",
+              "pm.test('Response body contains pet name', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('name').that.is.a('string').and.not.empty;",
+              "})",
+              "",
+              "pm.test('Response body contains pet status', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('status').that.is.a('string');",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/666",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "666"
+          ]
+        },
+        "description": "Это GET-запрос, который используется для получения данных о существующем питомце по его идентификатору. Тело запроса отсутствует; идентификатор питомца передаётся непосредственно в URL (например, `/pet/666`).\n\nУспешный GET-ответ возвращает статус `200 OK` и содержит данные питомца в формате JSON."
+      },
+      "response": []
+    },
+    {
+      "name": "Получить питомца по существующему статусу (GET)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test('Response has JSON content-type', function () {",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "})",
+              "",
+              "pm.test('Response body is an array', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test('Each pet in response has required fields', function () {",
+              "    const json = pm.response.json();",
+              "    json.forEach(function (pet) {",
+              "        pm.expect(pet).to.have.property('id');",
+              "        pm.expect(pet).to.have.property('name');",
+              "        pm.expect(pet).to.have.property('status');",
+              "    });",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/findByStatus?status=available",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "findByStatus"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "available"
+            },
+            {
+              "key": "status",
+              "value": "pending",
+              "type": "text",
+              "disabled": true
+            },
+            {
+              "key": "status",
+              "value": "sold",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Это GET-запрос, который используется для поиска питомцев по существующему статусу. Статус передаётся в качестве query-параметра (например, `?status=available`).\n\nУспешный GET-ответ возвращает статус `200 OK` и массив питомцев с указанным статусом в формате JSON."
+      },
+      "response": []
+    },
+    {
+      "name": "Получить питомца по несуществующему статусу (GET)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});",
+              "",
+              "pm.test('Response body is an empty array for unknown status', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.be.an('array').that.is.empty;",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/findByStatus?status=tired",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "findByStatus"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "tired"
+            }
+          ]
+        },
+        "description": "Это GET-запрос, который используется для проверки поведения API при поиске питомцев по несуществующему статусу. Статус передаётся в качестве query-параметра.\n\nОжидаемый ответ — статус `200 OK` с пустым массивом `[]`, подтверждающим, что питомцы с таким статусом не найдены."
+      },
+      "response": []
+    },
+    {
+      "name": "Обновить питомца (PUT)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              "",
+              "",
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test('Response has JSON content-type', function () {",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "})",
+              "",
+              "pm.test('Response body contains updated pet id', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('id', 666);",
+              "})",
+              "",
+              "pm.test('Response body contains updated pet name', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('name', 'Собака');",
+              "})",
+              "",
+              "pm.test('Response body contains updated pet status', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('status', 'pending');",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\":666,\n  \"name\": \"Собака\",\n  \"status\": \"pending\"\n}\n\n  ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/pet",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet"
+          ]
+        },
+        "description": "Это PUT-запрос, который используется для обновления данных существующего питомца. Обновлённые данные передаются в теле запроса в формате JSON.\n\nУспешный PUT-запрос, как правило, возвращает код ответа `200 OK` или `201 Created`."
+      },
+      "response": []
+    },
+    {
+      "name": "Проверить обновление питомца по ID (GET)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test('Response has JSON content-type', function () {",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "})",
+              "",
+              "pm.test('Response body contains correct pet id', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('id', 666);",
+              "})",
+              "",
+              "pm.test('Response body contains updated pet name after PUT', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('name', 'Собака');",
+              "})",
+              "",
+              "pm.test('Response body contains updated pet status after PUT', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('status', 'pending');",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/666",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "666"
+          ]
+        },
+        "description": "Это GET-запрос, который используется для проверки корректности обновления данных питомца после выполнения PUT-запроса. Идентификатор питомца передаётся в URL.\n\nУспешный GET-ответ возвращает статус `200 OK` и актуальные данные питомца в формате JSON."
+      },
+      "response": []
+    },
+    {
+      "name": "Удалить питомца (DELETE)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful DELETE request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+              "});",
+              "",
+              "",
+              "pm.test('Status code is 200, 202 or 204', function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([",
+              "        200,",
+              "        202,",
+              "        204",
+              "    ]);",
+              "})",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test('Response body confirms deletion or is empty', function () {",
+              "    if (pm.response.code !== 204 && pm.response.text().length > 0) {",
+              "        const json = pm.response.json();",
+              "        pm.expect(json).to.be.an('object');",
+              "    }",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/pet/666",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "666"
+          ]
+        },
+        "description": "Это DELETE-запрос, который используется для удаления питомца из системы. Идентификатор удаляемого питомца передаётся непосредственно в URL (например, `/pet/666`).\n\nУспешный DELETE-запрос, как правило, возвращает код ответа `200 OK`, `202 Accepted` или `204 No Content`."
+      },
+      "response": []
+    },
+    {
+      "name": "Получить несуществующего питомца по ID (GET)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test('Status code is 404', function () {",
+              "    pm.response.to.have.status(404);",
+              "})",
+              "",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test('Response body indicates pet not found', function () {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.have.property('message');",
+              "})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/pet/666",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pet",
+            "666"
+          ]
+        },
+        "description": "Это GET-запрос, который используется для проверки поведения API при запросе несуществующего питомца по идентификатору. Идентификатор передаётся в URL.\n\nОжидаемый ответ — статус `404 Not Found`, подтверждающий, что питомец с таким идентификатором не найден."
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://petstore.swagger.io/v2"
+    }
+  ]
+}
