@@ -17,7 +17,7 @@
 | Базы данных | SQL (SELECT, JOIN) |
 | API | HTTP, API, DevTools |
 | Системы | Linux, Git, GitHub, Hyper-V |
-| Языки | Python (основы), Bash, Английский B1 |
+| Языки | Python (основы), Bash |
 
 ---
 
@@ -57,8 +57,6 @@
 📥 **[Скачать коллекцию Postman](postman-collections/PetStore.postman_collection.json)**
 
 > *Как использовать: Postman → Import → выбрать JSON-файл. Переменная `base_url` настроена внутри коллекции.*
-
----
 
 ### 4. Автотесты (UI + API)
 
