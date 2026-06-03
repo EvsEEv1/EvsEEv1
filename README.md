@@ -60,6 +60,26 @@
 
 ---
 
+### 4. Автотесты (UI + API)
+
+**SauceDemo E2E** и **Rest Countries API** – два проекта автоматизации на Python + Pytest.
+
+- `automation-tests/ui_tests/saucedemo/` – UI тесты (Selenium, Page Object Model)
+- `automation-tests/api_tests/restcountries/` – API тесты (Requests, параметризация)
+
+**Как запустить (macOS):**
+```bash
+cd automation-tests/ui_tests/saucedemo
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+pytest -v tests/
+
+cd ../../api_tests/restcountries
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+pytest -v tests/
+```
+---
 ## 📫 Контакты
 
 - **Telegram:** @Evseev_Evsey
