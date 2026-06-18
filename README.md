@@ -1,88 +1,36 @@
 # Привет! Я Евсей Евсеев 👋
+# 🚀 QA/AQA портфолио — Евсей
 
-## 🔍 Перехожу в тестирование ПО из промышленного контроля качества
+Ищу позицию Junior QA / Automation QA Engineer.
 
-3 года работал с дефектами, документацией и контролем качества на производстве.  
-С ноября 2025 года целенаправленно учусь на **QA Engineer**.
+## 🧪 Автоматизация тестирования (Python)
 
----
+**Как запустить:** `pip install -r requirements.txt && pytest -v tests/`
 
-## 🛠 Мои навыки
+### UI-тесты (SauceDemo)
+- E2E сценарий покупки товара: логин → каталог → корзина → оформление
+- **Стек:** Python 3.13+, Selenium, Pytest, WebDriver Manager
+- **Паттерны:** Page Object Model, фикстуры, явные/неявные ожидания
+- **Код:** [посмотреть проект](https://github.com/EvsEEv1/EvsEEv1/tree/main/automation-tests/ui_tests/saucedemo)
 
-| Категория | Технологии |
-|-----------|------------|
-| Тестирование | Ручное, функциональное, регрессионное, чёрный ящик |
-| Документация | Тест-кейсы, чек-листы, баг-репорты |
-| Инструменты | Jira, Trello, Qase.io, TestIt, Postman, Swagger |
-| Базы данных | SQL (SELECT, JOIN) |
-| API | HTTP, API, DevTools |
-| Системы | Linux, Git, GitHub, Hyper-V |
-| Языки | Python (основы), Bash |
+![SauceDemo UI Tests](screenshots/ui_tests_passed.png)
 
----
+### API-тесты (Rest Countries v5)
+- Тестирование публичного REST API с авторизацией по ключу
+- **Стек:** Python 3.13+, Requests, Pytest
+- **Особенности:** адаптация под новую версию API, проверка метаданных, поисковые запросы, негативные сценарии
+- **Код:** [посмотреть проект](https://github.com/EvsEEv1/EvsEEv1/tree/main/automation-tests/api_tests/restcountries)
 
-## 📁 Мои проекты
+![Rest Countries API Tests](screenshots/api_tests_passed.png)
 
-### 1. Тестовое задание (принято работодателем)
-**Triangle 2000** — тестирование программы для определения типа треугольника.
+## 🛠 Ручное тестирование
+- **Тестовое задание Triangle 2000** (50+ тест-кейсов, 8 баг-репортов) → [посмотреть](https://github.com/EvsEEv1/EvsEEv1/tree/main/test-assignment-triangle2000)
+- **Postman-коллекция Petstore** (CRUD, автотесты) → [скачать](https://github.com/EvsEEv1/EvsEEv1/blob/main/postman-collections/PetStore.postman_collection.json)
 
-- [Полный отчёт: 50+ тест-кейсов, 8 баг-репортов, анализ](test-assignment-triangle2000/test-documentation/general.md)
-- [Ответы на теоретические вопросы](test-assignment-triangle2000/theory-answers.md)
+## 📊 SQL
+- **Примеры запросов** (SELECT, JOIN, GROUP BY) → [файл](https://github.com/EvsEEv1/EvsEEv1/blob/main/examples/sql-examples.sql)
 
-✅ Статус: принято → приглашение на собеседование
-
-### 2. Примеры SQL-запросов
-
-[Базовые запросы: SELECT, JOIN, GROUP BY, агрегация, IF](examples/sql-examples.sql)
-
-✅ Уровень: начальный, применяю в учебных задачах.
-
-### 3. Комплексное API-тестирование в Postman
-
-**Swagger Petstore** — полный цикл тестирования REST API.
-
-**Что сделано:**
-- CRUD-операции: создание (POST), чтение (GET), обновление (PUT), удаление (DELETE)
-- Позитивные и негативные сценарии (существующий / несуществующий питомец, поиск по разным статусам)
-- **Автотесты в Postman** (проверка статус-кода, времени ответа, типа данных, структуры JSON)
-
-**Коллекция включает 8 запросов:**
-- `POST /pet` — создание питомца (ID: 666)
-- `GET /pet/666` — получение данных
-- `PUT /pet` — обновление имени и статуса
-- `GET /pet/findByStatus` — поиск по статусу (available / tired)
-- `DELETE /pet/666` — удаление питомца
-- и проверочные GET-запросы после каждого действия
-
-📥 **[Скачать коллекцию Postman](postman-collections/PetStore.postman_collection.json)**
-
-> *Как использовать: Postman → Import → выбрать JSON-файл. Переменная `base_url` настроена внутри коллекции.*
-
-### 4. Автотесты (UI + API)
-
-**SauceDemo E2E** и **Rest Countries API** – два проекта автоматизации на Python + Pytest.
-
-- `automation-tests/ui_tests/saucedemo/` – UI тесты (Selenium, Page Object Model)
-- `automation-tests/api_tests/restcountries/` – API тесты (Requests, параметризация)
-
-**Как запустить (macOS):**
-```bash
-cd automation-tests/ui_tests/saucedemo
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-pytest -v tests/
-
-cd ../../api_tests/restcountries
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-pytest -v tests/
-```
----
 ## 📫 Контакты
-
-- **Telegram:** @Evseev_Evsey
-- **Email:** powerfulpugilist@gmail.com
-- **Резюме на hh.ru:** https://novosibirsk.hh.ru/resume/79fdc0a5ff104c24a50039ed1f435648336364
----
-
-*📌 Ищу первую коммерческую работу или стажировку в QA. Готов выполнить тестовое задание.*
+- Telegram: @Evseev_Evsey
+- Email: powerfulpugilist@gmail.com
+- Резюме: [ссылка на hh.ru](https://novosibirsk.hh.ru/resume/79fdc0a5ff104c24a50039ed1f435648336364)
