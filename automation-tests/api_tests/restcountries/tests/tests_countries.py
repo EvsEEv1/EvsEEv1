@@ -1,45 +1,56 @@
-BASE_URL = "https://restcountries.com/v3.1"
 TIMEOUT = 10  
+BASE_URL = "https://api.restcountries.com/countries/v5"
 
 def test_get_all_countries(api):
-    response = api.get(f"{BASE_URL}/all?fields=name,capital,currences", timeout=TIMEOUT)
+    response = api.get(f"{BASE_URL}", timeout=TIMEOUT)
     assert response.status_code == 200
-    countries = response.json()
-    for country in countries:
-        assert "name" in country
-
+    json_data = response.json()
+    countries = json_data["data"]["objects"]
+    assert len(countries) > 0, "Список стран не должен быть пустым"
+    first_country = countries[0]
+    assert "names" in first_country, "У страны должно быть поле 'names'"
+    assert "common" in first_country["names"], "Должно быть общее название"
+  
 def test_get_country_by_name(api):
-    name = "Germany"
-    response = api.get(f"{BASE_URL}/name/{name}", timeout=TIMEOUT)
+    query = "Germany"
+    response = api.get(f"{BASE_URL}?q={query}", timeout=TIMEOUT)
     assert response.status_code == 200
     data = response.json()
-    assert len(data) == 1
-    assert data[0]["name"]["common"] == name
+    countries = data["data"]["objects"]
+    assert len(countries) > 0, "Список стран не должен быть пустым"
+    country_name = countries[0]["names"]["common"], "Должно быть общее название"
+    assert query in country_name
 
 def test_get_country_by_alpha_code(api):
-    code = "de"
-    response = api.get(f"{BASE_URL}/alpha/{code}", timeout=TIMEOUT)
+    code = "GER"
+    response = api.get(f"{BASE_URL}/code?q={code}", timeout=TIMEOUT)
     assert response.status_code == 200
     data = response.json()
-    assert len(data) == 1
-    assert data[0]["cca2"].lower() == code
-
+    countries = data["data"]["objects"]
+    assert len(countries) == 1, "Должна быть найдена одна страна"
+    assert code in countries[0]["codes"]["cioc"], "Код страны не совпадает"
+    
 def test_get_countries_by_region(api):
     region = "Europe"
-    response = api.get(f"{BASE_URL}/region/{region}", timeout=TIMEOUT)
+    response = api.get(f"{BASE_URL}?region={region}", timeout=TIMEOUT)
     assert response.status_code == 200
-    countries = response.json()
+    data = response.json()
+    countries = data["data"]["objects"]
     for country in countries:
-        assert country["region"] == region
+        assert country["region"] == region, "Регионы найденных стран не совпадают с искомой"
 
 def test_search_country_by_partial_name(api):
     query = "united"
-    response = api.get(f"{BASE_URL}/name/{query}", timeout=TIMEOUT)
+    response = api.get(f"{BASE_URL}/names.common?q={query}", timeout=TIMEOUT)
     assert response.status_code == 200
     data = response.json()
-    names = [country["name"]["common"] for country in data]
-    assert any("United" in name for name in names)
+    countries = data["data"]["objects"]
+    names = [country["names"]["common"] for country in countries]
+    assert any(query.lower() in name.lower() for name in names), "Искомая часть слова не найдена в ответе"
     
 def test_non_existent_country(api):
-    response = api.get(f"{BASE_URL}/name/xyz")
-    assert response.status_code == 404
+    response = api.get(f"{BASE_URL}/names.common?q=d'xyz'")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data["data"]["objects"]) == 0, "Не должно быть найдено ни одной страны"
+    assert data["data"]["meta"]["total"] == 0, "Сервер не должен найти ни одной страны"

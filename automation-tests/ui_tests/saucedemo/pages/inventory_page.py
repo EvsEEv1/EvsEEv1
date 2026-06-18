@@ -9,8 +9,6 @@ class InventoryPage:
         return self.driver.find_element(*self.title_loc).text
 
     def add_product_to_cart(self, name_of_product: str):
-        # product_name — например "Sauce Labs Backpack"
-        # Локатор кнопки "Add to cart" у конкретного товара
         id_of_product_btn = f"add-to-cart-{name_of_product.lower().replace(' ', '-')}"
         add_button = (By.ID, id_of_product_btn)
         self.driver.find_element(*add_button).click()
