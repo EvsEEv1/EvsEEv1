@@ -12,5 +12,9 @@ class CartPage():
         return [el.text for el in cart_elements]
         
     def checkout(self):
-        self.driver.find_element(*self.chkout_btn_loc).click()
-        
+        body = self.driver.find_element(By.TAG_NAME, "body")
+        body.send_keys(Keys.ESCAPE)
+
+        wait = WebDriverWait(self.driver, 5)
+        checkout_btn = wait.until(EC.element_to_be_clickable(self.chkout_btn_loc))
+        checkout_btn.click()
