@@ -4,6 +4,8 @@ from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage, OverviewPage
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By 
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
  
 def test_buy_backpack(driver):
     
@@ -25,6 +27,7 @@ def test_buy_backpack(driver):
     cart.checkout()
     
     check = CheckoutPage(driver)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "first-name")))
     check.fill_forms("Mr","Client","125abcd")
     check.continue_checkout()
     
