@@ -5,6 +5,8 @@
 
 ## 🧪 Автоматизация тестирования (Python)
 
+[![Run Tests](https://github.com/EvsEEv1/EvsEEv1/actions/workflows/tests.yml/badge.svg)](https://github.com/EvsEEv1/EvsEEv1/actions/workflows/tests.yml)
+
 **Как запустить:**
 
 *Требуется Python 3.9+ и Git.*
