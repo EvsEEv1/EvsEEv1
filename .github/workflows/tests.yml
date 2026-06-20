@@ -28,7 +28,7 @@ jobs:
           pip install -r requirements.txt
           playwright install --with-deps chromium
 
-      - name: Run UI tests (Selenium + Playwright)
+      - name: Run UI tests (Playwright)
         run: |
           cd automation-tests/ui_tests/saucedemo
           pytest -v -m "not selenium" tests/
