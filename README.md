@@ -44,6 +44,8 @@ pytest -v tests/
   
 ![Playwright Test](screenshots/playwright_test_passed.png)
 
+> **Примечание:** Selenium-тест запускается локально. В CI выполняется только Playwright для стабильности.
+
 ### API-тесты (Rest Countries v5)
 - Тестирование публичного REST API с авторизацией по ключу
 - **Стек:** Python 3.13+, Requests, Pytest

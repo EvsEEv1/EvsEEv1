@@ -4,7 +4,9 @@ from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage, OverviewPage
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By 
- 
+import pytest
+
+@pytest.mark.selenium
 def test_buy_backpack(driver):
     
     login = LoginPage(driver)
