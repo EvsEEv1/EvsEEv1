@@ -12,7 +12,7 @@ def test_successful_login_playwright(browser):
     page = browser.new_page()
     page.goto("https://www.saucedemo.com/")
 
-    # Заполняем логин и пароль
+  
     page.fill("#user-name", "standard_user")
     page.fill("#password", "secret_sauce")
     page.click("#login-button")
